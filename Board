@@ -1,0 +1,193 @@
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Board {
+
+    private static final int NRows = 10;
+    private static final int NCols = 10;
+    private static final int NB_SHIPS = 5;
+
+    private static int playerShips = NB_SHIPS;
+    private static int MachineShips = NB_SHIPS;
+    private static final int[][] missGuess = new int[NRows][NCols];
+
+    private static final Random random = new Random();
+
+    public static final int F_SIZE = 10;
+    private static final int[][] playerField = new int[F_SIZE][F_SIZE];
+    private static final int[][] MachineField = new int[F_SIZE][F_SIZE];
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to Lewis BattleShip");
+
+        System.out.println("\nMachine: ");
+        deployPlayersShips(MachineField);
+        System.out.println("\n");
+        System.out.println("\nHuman: ");
+        deployPlayersShips(playerField);
+
+        Scanner scn = new Scanner(System.in);
+
+        do {
+            battle(scn);
+        } while (playerShips != 0 && MachineShips != 0);
+
+        gameOver();
+    }
+    public static void deployPlayersShips(int[][] field) {
+        for (int i = NB_SHIPS; i > 0; i--) {
+            int x = random.nextInt(field.length);
+            int y = random.nextInt(field.length);
+            boolean vertical = random.nextBoolean();
+
+            if (vertical) {
+                if (y + i > F_SIZE) {
+                    y -= i;
+                }
+            } else if (x + i > F_SIZE) {
+                x -= i;
+            }
+            boolean isFree = true;
+
+            if (vertical) {
+                for (int m = y; m < y + i; m++) {
+                    if (field[m][x] != 0) {
+                        isFree = false;
+                        break;
+                    }
+                }
+            } else {
+                for (int n = x; n < x + i; n++) {
+                    if (field[y][n] != 0) {
+                        isFree = false;
+                        break;
+                    }
+                }
+            }
+            if (!isFree) {
+                i++;
+                continue;
+            }
+
+            if (vertical) {
+                for (int m = Math.max(0, x - 1); m < Math.min(F_SIZE, x + 2); m++) {
+                    for (int n = Math.max(0, y - 1); n < Math.min(F_SIZE, y + i + 1); n++) {
+                        field[n][m] = 9;
+                    }
+                }
+            } else {
+                for (int m = Math.max(0, y - 1); m < Math.min(F_SIZE, y + 2); m++) {
+                    for (int n = Math.max(0, x - 1); n < Math.min(F_SIZE, x + i + 1); n++) {
+                        field[m][n] = 9;
+                    }
+                }
+            }
+
+            for (int j = 0; j < i; j++) {
+                field[y][x] = i;
+                if (vertical) {
+                    y++;
+                } else {
+                    x++;
+                }
+            }
+        }
+
+        printBoard2(field);
+    }
+
+    public static void battle(Scanner scn) {
+        playerTurn(scn);
+        machineTurn();
+
+        System.out.println("\nMachine: ");
+        printBoard2(MachineField);
+        System.out.println("\nHuman: ");
+        printBoard2(playerField);
+
+        System.out.println();
+        System.out.println("Your ships: " + playerShips + " | Machine ships: " + MachineShips);
+        System.out.println();
+    }
+
+    public static void playerTurn(Scanner scn) {
+        System.out.println("\nHuman's turn: ");
+        int x = -1, y = -1;
+        do {
+            System.out.print("Enter row number: ");
+            x = scn.nextInt();
+            System.out.print("Enter column number: ");
+            y = scn.nextInt();
+        } while ((x < 0 || x >= NRows) || (y < 0 || y >= NCols));
+
+        if (MachineField[x][y] != 0 && MachineField[x][y] != 9) {
+            System.out.println("You sunk the ship!");
+            MachineField[x][y] = 1; //"s";
+            MachineShips--;
+        } else if (".".equals(MachineField[x][y])) {
+            System.out.println("You missed");
+            MachineField[x][y] = 2; //"x";
+        }
+    }
+
+    public static void machineTurn() {
+        System.out.println("\nMachine's turn: ");
+
+        int x = random.nextInt(F_SIZE);
+        int y = random.nextInt(F_SIZE);
+        System.out.println("Enter row number: " + x);
+        System.out.println("Enter column number: " + y);
+
+        if ((x >= 0 && x < NRows) && (y >= 0 && y < NCols)) {
+            if (playerField[x][y] != 0 && playerField[x][y] != 9) {
+                System.out.println("The Computer sunk one of your ships!");
+                playerField[x][y] = 1; //"s";
+                playerShips--;
+            } else if (".".equals(playerField[x][y])) {
+                System.out.println("Machine missed");
+                playerField[x][y] = 2; //"x";
+                if (missGuess[x][y] != 1) {
+                    missGuess[x][y] = 1;
+                }
+            }
+        }
+    }
+    public static void gameOver() {
+        System.out.println("Your ships: " + playerShips + " | Computer ships: " + MachineShips);
+        if (playerShips > 0 && MachineShips <= 0) {
+            System.out.println("You won the war! ");
+        } else {
+            System.out.println("You lost the war! ");
+        }
+        System.out.println();
+    }
+
+    public static void printBoard2(int[][] field) {
+        System.out.print(" ");
+        System.out.println("0 1 2 3 4 5 6 7 8 9");
+        char[][] map = new char[F_SIZE][F_SIZE];
+        for (int i = 0; i < F_SIZE; i++) {
+            for (int j = 0; j < F_SIZE; j++) {
+                switch (field[i][j]) {
+                    case 0:
+                    case 9:
+                        map[i][j] = '.';
+                        break;
+                    case 1:
+                        map[i][j] = 's';
+                        break;
+                    case 2:
+                        map[i][j] = 'x';
+                        break;
+                    default:
+                        map[i][j] = 'o';
+                        break;
+                }
+            }
+        }
+
+        Arrays.stream(map)
+            .forEach(m - > System.out.println(Arrays.toString(m).replace(",", "")));
+    }
+}
