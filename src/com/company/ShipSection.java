@@ -6,7 +6,7 @@ package com.company;
 public class ShipSection {
     int row;
     int col;
-    String tile = "S";  // Starts off as S, if the ShipSection is hit then we change it to show it is hit with an X
+    String tile = "s";  // Starts off as S, if the ShipSection is hit then we change it to show it is hit with an X
     boolean empty;
     /* memberOf string ties this ship section to a specific piece. When an action occurs on this ship section
             iterate through the list of game pieces and get that piece, update the information for it accordingly. That may
