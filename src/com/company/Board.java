@@ -4,13 +4,12 @@ package com.company;
  * Jointly worked on between Joshua Belfor and Muhammad Ashfaq
  */
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
 
 public class Board {
     private ShipSection[][] board = new ShipSection[10][10];
     private boolean player;
-    private ArrayList<Piece> pieces = new ArrayList<Piece>();
+    private ArrayList<Piece> pieces;
 
     public Board(boolean player) {
         for (int i = 0; i < 10; i++) {
@@ -26,7 +25,7 @@ public class Board {
                 int r = sects.get(j).getRow();
                 int c = sects.get(j).getCol();
                 board[r][c] = sects.get(j);
-                if (player == false) {
+                if (!player) {
                     board[r][c].setTile("~");
                 }
 
@@ -37,7 +36,7 @@ public class Board {
         // determine once the ships are set up if they are hidden or not. True if player, False if AI.
     }
 
-    public void attack(String row, int col) {
+    public boolean attack(String row, int col) {
         int iRow = letterToNum(row);
         if (board[iRow][col].isEmpty() == false) {
             board[iRow][col].setTile("x");
@@ -57,9 +56,11 @@ public class Board {
                 }
             }
             System.out.println("Hit!");
+            return true;
         } else {
             board[iRow][col].setTile("o");
             System.out.println("Miss!");
+            return false;
         }
     }
 
@@ -76,37 +77,17 @@ public class Board {
     private int letterToNum(String row) {
         int newRow = 0;
         row = row.toUpperCase();
-        switch (row){
-            case "A":
-                newRow = 0;
-                break;
-            case "B":
-                newRow = 1;
-                break;
-            case "C":
-                newRow = 2;
-                break;
-            case "D":
-                newRow = 3;
-                break;
-            case "E":
-                newRow = 4;
-                break;
-            case "F":
-                newRow = 5;
-                break;
-            case "G":
-                newRow = 6;
-                break;
-            case "H":
-                newRow = 7;
-                break;
-            case "I":
-                newRow = 8;
-                break;
-            case "J":
-                newRow = 9;
-                break;
+        switch (row) {
+            case "A" -> newRow = 0;
+            case "B" -> newRow = 1;
+            case "C" -> newRow = 2;
+            case "D" -> newRow = 3;
+            case "E" -> newRow = 4;
+            case "F" -> newRow = 5;
+            case "G" -> newRow = 6;
+            case "H" -> newRow = 7;
+            case "I" -> newRow = 8;
+            case "J" -> newRow = 9;
         }
         return newRow;
     }
