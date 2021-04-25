@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class AiPlayer extends Player{
-    private String name = "";
+    public String name = "";
     // Sets player up as a Computer player as opposed to a human player
     @Override
     public void setName(String name) {
