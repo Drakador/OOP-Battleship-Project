@@ -2,7 +2,7 @@ package com.company;
 
 public class Player {
 
-    private String name = "";
+    public String name = "";
 
     public Player() {
     }
