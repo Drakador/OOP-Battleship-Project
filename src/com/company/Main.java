@@ -77,7 +77,6 @@ public class Main {
             
             System.out.println("The computer fires. ");
             isHit = ai.fireAtHumanShips(ai.shotTracker(), playerBoard);
-            ai.logShot(ai.shotTracker(), );
 		
         }
 
