@@ -77,6 +77,19 @@ public class Board {
         }
     }
 
+    // Checks total amount of HP across all pieces left. True if all are sunk, false otherwise.
+    public boolean checkWin(){
+        int totalHP = 0;
+        for(Piece i : pieces){
+            totalHP += i.getHp();
+        }
+        if (totalHP == 0){
+            return true;
+        }
+        return false;
+
+    }
+
     private int letterToNum(String row) {
         int newRow = 0;
         row = row.toUpperCase();
