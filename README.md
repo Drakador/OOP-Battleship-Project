@@ -3,8 +3,11 @@ Lewis University SP21-CPSC-24500-003 Final Project
 
 Team Members: 
 Joshua Belfor
+
 Kim Johnson
-Rashaan Kalota
+
+Muhammad Ashfaq
+
 Aaron Skonieczny
 
 # What game are you going to build?

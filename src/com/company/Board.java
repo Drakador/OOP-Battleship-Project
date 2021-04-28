@@ -66,9 +66,12 @@ public class Board {
 
 
     public void printBoard() {
+        System.out.println("  1 2 3 4 5 6 7 8 9 10");
+        String[] lets = {"A","B", "C","D","E","F","G","H","I","J"};
         for (int i = 0; i < 10; i++){
+            System.out.print(lets[i] + " ");
             for (int j = 0; j < 10; j++){
-                System.out.print(board[i][j].getTile());
+                System.out.print(board[i][j].getTile() + " ");
             }
             System.out.println();
         }
