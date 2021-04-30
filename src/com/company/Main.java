@@ -79,7 +79,7 @@ public class Main {
 
                 for(int i = 0; i < aiPieces.size(); i++){
                     if(aiPieces.get(i).isSunk()){
-                        System.out.println("Enemy " + aiPieces.get(i) + " is sunk!");
+                        System.out.println("Enemy " + aiPieces.get(i).type + " is sunk!");
                     }
                 }
 
@@ -88,7 +88,7 @@ public class Main {
 
                 for(int i = 0; i < playerPieces.size(); i++){
                     if(playerPieces.get(i).isSunk()){
-                        System.out.println("Friendly " + playerPieces.get(i) + " is sunk!");
+                        System.out.println("Friendly " + playerPieces.get(i).type + " is sunk!");
                     }
                 }
             }
