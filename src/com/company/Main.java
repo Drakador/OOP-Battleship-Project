@@ -96,6 +96,16 @@ public class Main {
 
         }
 
+        // As a reminder, the board returns true if the HP is zero, so you are checking for the other side.
+
+        // This checks if the Players HP is zero, if not then the player won.
+        if(playerBoard.checkWin() == false){
+            System.out.println(newPlayer.getName() + " has Won!");
+        }
+        else{
+            System.out.println("The Computer has Won!");
+        }
+
     }
 
 }
