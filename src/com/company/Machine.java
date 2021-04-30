@@ -62,7 +62,7 @@ public class Machine extends Player{
             row = (int) (Math.random() * 10);
             col = (int) (Math.random() * 10);
             squareValue = getElement(shotTracker, row,col);
-            System.out.println(getElement(shotTracker, row,col));
+            
 
 
         } while(squareValue != 2);
@@ -70,7 +70,7 @@ public class Machine extends Player{
         String letter = convertRow(row);
         hit = human.attack(letter,col);
         setElement(shotTracker, row,col);
-        System.out.println(getElement(shotTracker, row,col));
+        
 
         // Returns new guess coordinates that will be used to pass through randomStrike() method.
         return hit ;
