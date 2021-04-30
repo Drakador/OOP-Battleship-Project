@@ -81,7 +81,7 @@ public class Main {
 
             for(int i = 0; i < aiPieces.size(); i++){
                 if(aiPieces.get(i).isSunk()){
-                    System.out.println("Enemy " + aiPieces.get(i) + " is sunk!");
+                    System.out.println("Enemy " + aiPieces.get(i).type + " is sunk!");
                 }
             }
 
