@@ -18,6 +18,10 @@ public class Main {
 
 
     public static void main(String[] args) {
+        /*
+        To test the AI for victory:
+            Comment out line 50-85, and uncomment the player shot from lin 86
+         */
         String xCoordinate;
         int yCoordinate = 0;
         Boolean isHit;
@@ -43,7 +47,7 @@ public class Main {
             System.out.println("____________________________");
             playerBoard.printBoard();
             System.out.println("Your move, " + newPlayer.name);
-
+        //*
             try {
                 System.out.println("Enter an X coordinate A-J.");
                 xCoordinate = scan.next();
@@ -78,11 +82,17 @@ public class Main {
             }
             
             aiBoard.attack(xCoordinate, yCoordinate - 1);
+            //*/
+            //aiBoard.attack("a", 4); // Uncomment this line to rapid test AI
 
             for(int i = 0; i < aiPieces.size(); i++){
                 if(aiPieces.get(i).isSunk()){
                     System.out.println("Enemy " + aiPieces.get(i).type + " is sunk!");
                 }
+            }
+            // If the player has won after their turn, break out.
+            if(aiBoard.checkWin() == true) {
+                break;
             }
 
             System.out.println("The computer fires. ");
@@ -98,7 +108,6 @@ public class Main {
         System.out.println("____________________________");
         playerBoard.printBoard();
         // As a reminder, the board returns true if the HP is zero, so you are checking for the other side.
-
         // This checks if the Players HP is zero, if not then the player won.
         if(playerBoard.checkWin() == false){
             System.out.println(newPlayer.getName() + " has Won!");
