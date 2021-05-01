@@ -7,10 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Machine extends Player{
-    private int[][] shotTracker;
 
     public Machine(String name) {
-        this.shotTracker = shotTracker();
         this.name = name;
         System.out.println("Computer Player has been created");
     }
