@@ -91,7 +91,7 @@ public class Machine extends Player{
     coordinates to be equal to 2 (the Array default) before allowing a shot to be fired.
      */
     private void setElement(int[][] coordinates, int row, int col) {
-            int squareValue = 1;
+        int squareValue = 1;
         coordinates[row][col] = squareValue;
     }
 
