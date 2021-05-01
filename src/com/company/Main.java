@@ -32,7 +32,7 @@ public class Main {
         newPlayer.setName(newPlayer.name);
 
         Machine ai = new Machine();
-        ai.shotTracker();
+        int[][] aiShotTracker = ai.shotTracker();
 
         Board aiBoard = new Board(false);
         ArrayList<Piece> aiPieces = aiBoard.getPieces();
@@ -96,7 +96,7 @@ public class Main {
             }
 
             System.out.println("The computer fires. ");
-            isHit = ai.fireAtHumanShips(ai.shotTracker(), playerBoard);
+            isHit = ai.fireAtHumanShips(aiShotTracker, playerBoard);
 
             for(int i = 0; i < playerPieces.size(); i++){
                 if(playerPieces.get(i).isSunk()){
