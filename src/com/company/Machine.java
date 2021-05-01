@@ -52,8 +52,6 @@ public class Machine extends Player{
         int row, col;
         int squareValue;
         Boolean hit = false;
-        int shotFired = 1;
-
 
         // This loop will continue to create a random row and column guess while
         // the random coordinates on the machine strike board are not empty.
@@ -62,8 +60,7 @@ public class Machine extends Player{
             row = (int) (Math.random() * 10);
             col = (int) (Math.random() * 10);
             // gets element from shot tracker to check that shot has not already been taken
-            squareValue = getElement(shotTracker, row,col);
-            
+            squareValue = getElement(shotTracker, row,col);          
 
         // Square values of 2 on shot tracker means that a shot has not been taken yet at those coordinates
         } while(squareValue != 2);
@@ -71,8 +68,7 @@ public class Machine extends Player{
         String letter = convertRow(row);
         hit = human.attack(letter,col);
         // sets square coordinates of shot tracker to 1 so ai cannot shoot again at that square
-        setElement(shotTracker, row,col);
-        
+        setElement(shotTracker, row,col);       
 
         // Returns new guess coordinates that will be used to pass through randomStrike() method.
         return hit ;
