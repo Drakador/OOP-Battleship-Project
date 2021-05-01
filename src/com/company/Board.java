@@ -38,30 +38,34 @@ public class Board {
 
     public boolean attack(String row, int col) {
         int iRow = letterToNum(row);
-        if (board[iRow][col].isEmpty() == false) {
-            board[iRow][col].setTile("x");
+        if(board[iRow][col].isWasHit() == false) {
+            board[iRow][col].setWasHit(true);
+            if (board[iRow][col].isEmpty() == false) {
+                board[iRow][col].setTile("x");
 
-            // Grab the correct piece and update its HP.
-            for (Piece p : pieces) {
-                if (p.getType().equals(board[iRow][col].getMemberOf())) {
-                    p.setHp(p.getHp() - 1);
-                    // Update the shipSection
-                    ArrayList<ShipSection> temp = p.getSections();
-                    for(ShipSection s : temp){
-                        if (s.getNum() == board[iRow][col].getNum()){
-                            s = board[iRow][col];
-                            p.setSections(temp);
+                // Grab the correct piece and update its HP.
+                for (Piece p : pieces) {
+                    if (p.getType().equals(board[iRow][col].getMemberOf())) {
+                        p.setHp(p.getHp() - 1);
+                        // Update the shipSection
+                        ArrayList<ShipSection> temp = p.getSections();
+                        for (ShipSection s : temp) {
+                            if (s.getNum() == board[iRow][col].getNum()) {
+                                s = board[iRow][col];
+                                p.setSections(temp);
+                            }
                         }
                     }
                 }
+                System.out.println("Hit!");
+                return true;
+            } else {
+                board[iRow][col].setTile("o");
+                System.out.println("Miss!");
+                return false;
             }
-            System.out.println("Hit!");
-            return true;
-        } else {
-            board[iRow][col].setTile("o");
-            System.out.println("Miss!");
-            return false;
         }
+        return true;
     }
 
 

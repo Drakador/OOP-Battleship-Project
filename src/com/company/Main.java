@@ -93,9 +93,10 @@ public class Main {
                     System.out.println("Friendly " + playerPieces.get(i).type + " is sunk!");
                 }
             }
-
         }
-
+        aiBoard.printBoard();
+        System.out.println("____________________________");
+        playerBoard.printBoard();
         // As a reminder, the board returns true if the HP is zero, so you are checking for the other side.
 
         // This checks if the Players HP is zero, if not then the player won.

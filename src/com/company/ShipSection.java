@@ -8,6 +8,7 @@ public class ShipSection {
     int col;
     String tile = "s";  // Starts off as S, if the ShipSection is hit then we change it to show it is hit with an X
     boolean empty;
+    boolean wasHit = false;
     /* memberOf string ties this ship section to a specific piece. When an action occurs on this ship section
             iterate through the list of game pieces and get that piece, update the information for it accordingly. That may
             include removing HP, and checking if the HP is 0, making the ship sunk. use num to get which shipSection was
@@ -88,5 +89,11 @@ public class ShipSection {
         this.num = num;
     }
 
+    public boolean isWasHit() {
+        return wasHit;
+    }
 
+    public void setWasHit(boolean wasHit) {
+        this.wasHit = wasHit;
+    }
 }
